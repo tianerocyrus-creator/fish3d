@@ -1,0 +1,34 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores angler progress and inventory.",
+      "type": "object",
+      "properties": {
+        "money": { "type": "number", "description": "Current currency" },
+        "xp": { "type": "number", "description": "Experience points" },
+        "inventory": { "type": "array", "description": "List of fish caught" },
+        "activeRodId": { "type": "number", "description": "ID of currently used rod" },
+        "activeBaitId": { "type": "string", "description": "ID of currently used bait" },
+        "lastUpdated": { "type": "number", "description": "Unix timestamp of last save" }
+      },
+      "required": ["money", "xp", "activeRodId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Protected user data"
+    },
+    "/system/config": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string" },
+          "timestamp": { "type": "number" }
+        }
+      },
+      "description": "Global system configuration and announcements"
+    }
+  }
+}
